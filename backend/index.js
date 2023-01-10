@@ -13,6 +13,11 @@ app.get('/api/task-items', (req, res) => {
   res.json({ data: taskItems });
 });
 
+const taskGroups = require('./api/task-groups.json');
+app.get('/api/task-groups', (req, res) => {
+  res.json({ data: taskGroups });
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });

@@ -1,20 +1,23 @@
 [
   {
     "id": 1,
-    "text": "Description of the first task",
-    "end-date": "2023-01-25",
+    "header": "Header 1",
+    "description": "Description of the first task",
+    "deadline": "2023-01-25",
     "done": true
   },
   {
     "id": 2,
-    "text": "Description of the second task",
-    "end-date": "2023-01-25",
+    "header": "Header 2",
+    "description": "Description of the second task",
+    "deadline": "2023-01-25",
     "done": true
   },
   {
     "id": 3,
-    "text": "Description of the third task",
-    "end-date": "2023-01-25",
+    "header": "Header 3",
+    "description": "Description of the third task",
+    "deadline": "2023-01-25",
     "done": false
   }
 ]

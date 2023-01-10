@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "tasks-id": [1, 2],
+    "header": "Group header 1"
+  },
+  {
+    "id": 2,
+    "tasks-id": [3],
+    "header": "Group header 2"
+  }
+]
