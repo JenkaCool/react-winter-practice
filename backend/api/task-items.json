@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "text": "Description of the first task",
+    "end-date": "2023-01-25",
+    "done": true
+  },
+  {
+    "id": 2,
+    "text": "Description of the second task",
+    "end-date": "2023-01-25",
+    "done": true
+  },
+  {
+    "id": 3,
+    "text": "Description of the third task",
+    "end-date": "2023-01-25",
+    "done": false
+  }
+]
