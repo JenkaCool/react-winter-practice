@@ -89,11 +89,34 @@ Task__list {
 }
 
 .button {
+  display: flex;
+  direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: auto;
+  gap: 10px;
+  wrap: no-wrap;
+  text-align: left;
+  height: 50px;
+  line-height: 50px;
+  width: auto;
+  text-color: #333333;
+  background-color: #E0E0E0;
+  border-radius: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.small_button {
   width: 25px;
   height: 25px;
-  border-radius: 2px;
   border: 2px solid #BDBDBD;
   background-color: #F8F8F8;
+}
+
+.plus_img {
+  height: 25px;
+  width: 25px;
 }
 
 @media (prefers-reduced-motion: no-preference) {

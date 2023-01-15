@@ -1,3 +1,5 @@
+import plus from './imgs/plus.svg';
+
 import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import './App.css';
@@ -27,7 +29,11 @@ function App() {
               <Form.Group key={item.id} className="Task__group">
                 <Form.Control type="text" value={item.header} />
               </Form.Group>
-            ))}
+          ))}
+          <div className="button __add_group">
+            <img src={plus} className="plus_img" alt="+" />
+            <span>Add group...</span>
+          </div>
         </div>
       </div>
       <div className="Content">
@@ -41,11 +47,17 @@ function App() {
                 <Form.Control type="text" value={item.description} />
                 <Form.Control type="text" value={item.deadline} />
               </div>
-              <div className="status __in_process"><span className="deadline_icon"/><p>in process</p></div>
-              <div className="button __watching"></div>
-              <div className="button __delete"></div>
+              <div className="status __in_process">
+                <span className="deadline_img"/>
+                <p>in process</p></div>
+              <div className="small_button __watching"></div>
+              <div className="small_button __delete"></div>
             </Form.Group>
           ))}
+          <div className="button __add_task">
+            <img src={plus} className="plus_img" alt="+" />
+            <span>Add task...</span>
+          </div>
         </div>
       </div>
     </div>
