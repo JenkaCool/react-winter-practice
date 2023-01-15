@@ -19,11 +19,9 @@ function App() {
 
   return (
     <div className="App">
-      <div className="Top_bar">
-
-      </div>
+      <div className="Top_bar"></div>
       <div className="Sidebar">
-        <h2> Groups </h2>
+        <h2 className="group_header"> Groups </h2>
           <div className="Task__groups">
             {taskGroups.map((item) => (
               <Form.Group key={item.id} className="Task__group">
@@ -38,9 +36,14 @@ function App() {
           {taskItems.map((item) => (
             <Form.Group key={item.id} className="Task__item">
               <Form.Check type="checkbox" checked={item.done} />
-              <Form.Control type="text" value={item.header} />
-              <Form.Control type="text" value={item.description} />
-              <Form.Control type="text" value={item.deadline} />
+              <div className="task_field">
+                <Form.Control type="text" value={item.header} />
+                <Form.Control type="text" value={item.description} />
+                <Form.Control type="text" value={item.deadline} />
+              </div>
+              <div className="status __in_process"><span className="deadline_icon"/><p>in process</p></div>
+              <div className="button __watching"></div>
+              <div className="button __delete"></div>
             </Form.Group>
           ))}
         </div>
