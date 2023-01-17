@@ -29,7 +29,8 @@
   left: 0;
   position: fixed;
   height: 100vh;
-  margin: 0;
+  width: 240px;
+  min-width: 240px;
   padding: 0;
   text-align: left;
   overflow: auto;
@@ -43,9 +44,25 @@
   color: #D9D9D9;
 }
 
+.Task__group {
+/*  display: flex;
+  direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+*/
+
+}
+
+.Task__group input {
+  width: auto;
+}
+
 .Content {
   grid-area: c;
   padding: 40px;
+  min-width: 1100px;
+/*background-color: #F8F8F8;*/
 }
 
 Task__list {
@@ -60,13 +77,19 @@ Task__list {
   padding: 16px 40px;
   display: flex;
   direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   background-color: #F8F8F8;
+  gap: 20px;
 }
 
 .Header {
   text-align: left;
+}
+
+.task-done input {
+  text-decoration-color: #A5A5A5;
+  color: #A5A5A5;
 }
 
 .status {
@@ -77,15 +100,36 @@ Task__list {
   direction: row;
   justify-content: center;
   wrap: no-wrap;
+  color: white;
+  font-weight: bold;
+  text-shadow: #A5A5A5 0 0 1px;
+  text-transform: lowercase;
+}
+
+.status-text:first-letter {
+    text-transform: uppercase;
 }
 
 .__in_process {
   background-color: #F2C94C;
 }
 
+.__done {
+  background-color: #6FCF97;
+}
+
+.__expired {
+  background-color: #EB5757;
+}
+
+.__deadline_is_coming  {
+  background-color: #F2994A;
+}
+
 .task_field {
   display: inline-flex;
   width: auto;
+  gap: 20px;
 }
 
 .button {
@@ -101,17 +145,27 @@ Task__list {
   line-height: 50px;
   width: auto;
   text-color: #333333;
-  background-color: #E0E0E0;
+  background-color: #F8F8F8;
   border-radius: 2px;
   padding-left: 10px;
   padding-right: 10px;
+  transition: 0.6s;
+  cursor: pointer;
 }
 
-.small_button {
-  width: 25px;
-  height: 25px;
-  border: 2px solid #BDBDBD;
+.button:hover {
+  background-color: #E0E0E0;
+}
+
+.button_small {
+  min-height: 25px;
+  max-height: 25px;
+  min-width: 25px;
+  max-width: 25px;
+  border: 1px solid #BDBDBD;
+  border-radius: 2px;
   background-color: #F8F8F8;
+  cursor: pointer;
 }
 
 .plus_img {

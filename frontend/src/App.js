@@ -28,6 +28,7 @@ function App() {
             {taskGroups.map((item) => (
               <Form.Group key={item.id} className="Task__group">
                 <Form.Control type="text" value={item.header} />
+                <div className="button_small __menu">...</div>
               </Form.Group>
           ))}
           <div className="button __add_group">
@@ -42,16 +43,22 @@ function App() {
           {taskItems.map((item) => (
             <Form.Group key={item.id} className="Task__item">
               <Form.Check type="checkbox" checked={item.done} />
-              <div className="task_field">
+              <div className={item.done ? 'task_field task-done' : 'task_field'}>
                 <Form.Control type="text" value={item.header} />
                 <Form.Control type="text" value={item.description} />
                 <Form.Control type="text" value={item.deadline} />
               </div>
-              <div className="status __in_process">
-                <span className="deadline_img"/>
-                <p>in process</p></div>
-              <div className="small_button __watching"></div>
-              <div className="small_button __delete"></div>
+              {item.done ?
+                <div className='status __done'>
+                  <span className="deadline_img"/>
+                  <span className="status-text">done</span>
+                </div>
+                :
+                <div className='status __in_process'>
+                  <span className="deadline_img"/>
+                  <span className="status-text">in process</span>
+                </div>}
+              <div className="button_small __menu">...</div>
             </Form.Group>
           ))}
           <div className="button __add_task">
