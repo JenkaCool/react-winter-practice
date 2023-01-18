@@ -7,7 +7,7 @@ import './App.css';
 function App() {
   const [taskItems, setTaskItems] = useState([]);
   const [taskGroups, setTaskGroups] = useState([]);
-
+//  const [tasks, setTasks] = useState(initTasks);
 
   useEffect(() => {
     fetch('http://localhost:3010/api/task-items')
@@ -19,6 +19,26 @@ function App() {
       .then((result) => setTaskGroups(result.data));
   }, []);
 
+/*
+  function changeTaskStatus(taskId) {
+    console.log(tasks);
+    const changedTasksList = [...tasks];
+    const task = changedTasksList.find(
+      item => item.id === taskId);
+    if (task)
+      task.done = !task.done;
+    setTasks(changedTasksList);
+    console.log('Status changed');
+  }
+*/
+  function changeTaskStatus(taskId)  {
+    console.log('Status changed');
+  }
+
+  function printMessage() {
+    console.log('Field changed');
+  }
+
   return (
     <div className="App">
       <div className="Top_bar"></div>
@@ -27,7 +47,7 @@ function App() {
           <div className="Task__groups">
             {taskGroups.map((item) => (
               <Form.Group key={item.id} className="Task__group">
-                <Form.Control type="text" value={item.header} />
+                <Form.Control type="text" value={item.header} readOnly/>
                 <div className="button_small __menu">...</div>
               </Form.Group>
           ))}
@@ -42,11 +62,11 @@ function App() {
           <h2 className="Header"> Task list </h2>
           {taskItems.map((item) => (
             <Form.Group key={item.id} className="Task__item">
-              <Form.Check type="checkbox" checked={item.done} />
+              <Form.Check type="checkbox" checked={item.done} onClick={() => changeTaskStatus(item.id)} />
               <div className={item.done ? 'task_field task-done' : 'task_field'}>
-                <Form.Control type="text" value={item.header} />
-                <Form.Control type="text" value={item.description} />
-                <Form.Control type="text" value={item.deadline} />
+                <Form.Control type="text" value={item.header} onChange={() => printMessage()} />
+                <Form.Control type="text" value={item.description} onChange={() => printMessage()} />
+                <Form.Control type="text" value={item.deadline} onChange={() => printMessage()} />
               </div>
               {item.done ?
                 <div className='status __done'>
