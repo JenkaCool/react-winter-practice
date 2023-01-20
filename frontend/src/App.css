@@ -58,6 +58,10 @@
   width: auto;
 }
 
+.__selected-group {
+  font-weight: bold;
+}
+
 .Content {
   grid-area: c;
   padding: 40px;

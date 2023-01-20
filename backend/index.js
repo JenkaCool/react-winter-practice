@@ -8,14 +8,9 @@ app.use((req, res, next) => {
   next();
 });
 
-const taskItems = require('./api/task-items.json');
-app.get('/api/task-items', (req, res) => {
-  res.json({ data: taskItems });
-});
-
-const taskGroups = require('./api/task-groups.json');
-app.get('/api/task-groups', (req, res) => {
-  res.json({ data: taskGroups });
+const groupsList = require('./api/all-tasks.json');
+app.get('/api/all-tasks', (req, res) => {
+  res.json({ data: groupsList });
 });
 
 app.listen(PORT, () => {

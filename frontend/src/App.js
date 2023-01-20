@@ -1,25 +1,44 @@
-import plus from './imgs/plus.svg';
-
 import { useState, useEffect } from 'react';
-import Form from 'react-bootstrap/Form';
 import './App.css';
 import TasksList from './components/TasksList.js';
 import GroupsList from './components/GroupsList.js';
 
 function App() {
-  const [taskItems, setTaskItems] = useState([]);
-  const [groupItems, setGroupItems] = useState([]);
+  const [groups, setGroups] = useState([]);
+  const [taskItems, setTaskItems] = useState([ ]);
+  const [groupItems, setGroupItems] = useState([ ]);
 //  const [tasks, setTasks] = useState(initTasks);
 
   useEffect(() => {
-    fetch('http://localhost:3010/api/task-items')
+    fetch('http://localhost:3010/api/all-tasks')
       .then((res) => res.json())
-      .then((result) => setTaskItems(result.data));
-
-    fetch('http://localhost:3010/api/task-groups')
-      .then((res) => res.json())
-      .then((result) => setGroupItems(result.data));
+      .then((result) => setGroups(result.data));
   }, []);
+/*
+  function getGroupsList() {
+
+  }
+
+  function getAllGroupsTasks() {
+
+  }
+
+  function setSelectedGroupId(groupId) {
+    setSelectedGroupId(groupId);
+  }
+
+  function getSelectedGroupTitle(groupId) {
+    const currentTitle = groupItems.filter(item => {
+      return item.id === groupId
+    });
+    setSelectedGroup(currentTitle);
+    return currentTitle;
+  }
+
+  function getSelectedGroupTasks() {
+
+  }
+*/
 
 /*
   function changeTaskStatus(taskId) {
@@ -38,7 +57,7 @@ function App() {
     <div className="App">
       <div className="Top_bar"></div>
       <div className="Sidebar">
-        <GroupsList groupItems={groupItems}/>
+        <GroupsList groupItems={groups}/>
       </div>
       <div className="Content">
         <TasksList taskItems={taskItems}/>
