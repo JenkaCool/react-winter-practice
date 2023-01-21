@@ -5,20 +5,33 @@ import GroupsList from './components/GroupsList.js';
 
 function App() {
   const [groups, setGroups] = useState([]);
-  const [taskItems, setTaskItems] = useState([ ]);
-  const [groupItems, setGroupItems] = useState([ ]);
-//  const [tasks, setTasks] = useState(initTasks);
+  const [tasks, setTasks] = useState([]);
+  const [selectedGroupId, setSelectedGroupId] = useState(null);
 
   useEffect(() => {
     fetch('http://localhost:3010/api/all-tasks')
       .then((res) => res.json())
-      .then((result) => setGroups(result.data));
+      .then((result) => initData(result.data));
   }, []);
-/*
-  function getGroupsList() {
 
+
+  function initData(data) {
+    var currentGroupsData = [];
+    currentGroupsData = data;
+    setGroups(currentGroupsData);
+
+    var firstGroupId = null;
+    firstGroupId = currentGroupsData[0].id;
+    setSelectedGroupId(firstGroupId);
+
+    var currentGroup = [];
+    var groupTasks = [];
+    currentGroup = currentGroupsData.find(item => item.id === firstGroupId);
+    groupTasks = currentGroup.tasks;
+    setTasks(groupTasks);
+    console.log(groupTasks);
   }
-
+/*
   function getAllGroupsTasks() {
 
   }
@@ -60,7 +73,7 @@ function App() {
         <GroupsList groupItems={groups}/>
       </div>
       <div className="Content">
-        <TasksList taskItems={taskItems}/>
+        <TasksList taskItems={tasks}/>
       </div>
     </div>
   );

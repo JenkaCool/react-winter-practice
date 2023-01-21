@@ -5,6 +5,8 @@ import Form from 'react-bootstrap/Form';
 
 const TasksList = (props) => {
   const taskItems = props.taskItems;
+  const [selectedGroupId, setSelectedGroupId] = useState(1);
+
 //  const title = props.groupTitle;
 //  <h2> { title } </h2>
 
