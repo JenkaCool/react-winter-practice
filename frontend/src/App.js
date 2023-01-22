@@ -18,35 +18,52 @@ function App() {
 
 
   const handelChangeGroup = (id) => {
-    console.log(id);
+    //console.log(id);
     updateSelectedGroupData(groups, id);
-  }
+  };
+
+  const handelCheckStatus = (groupId, taskId) => {
+    //console.log(id);
+    var currentGroup = [];
+    var currentTask = [];
+    var currentTaskId = [];
+
+    currentGroup = groups.find(item => item.id === groupId);
+    console.log(currentGroup);
+
+    currentTaskId = currentGroup.tasks.findIndex(item => item.id === taskId);
+    currentTask = currentGroup.tasks[currentTaskId];
+    const taskDone = currentTask.done;
+    currentGroup.tasks[currentTaskId].done = !taskDone;
+
+    setGroups(groups.map((item) => item.id === groupId ? { ...item, currentGroup } : item));
+  };
 
   function initData(data) {
     updateGroupsData(data);
-    var id = getFirstGroupId(data);
+    const id = getFirstGroupId(data);
     updateSelectedGroupData(data, id);
     console.log(data, id);
-  }
+  };
 
   function updateGroupsData(data) {
     setGroups(data);
-  }
+  };
 
   function getFirstGroupId(data) {
     return data[0].id;
-  }
+  };
 
   function updateSelectedGroupData(data, id) {
     updateGroupId(id);
     updateGroupTitle(data, id);
     updateGroupTasks(data, id);
-  }
+  };
 
   function updateGroupId(id) {
     //console.log(id);
     setSelectedId(id);
-  }
+  };
 
   function updateGroupTitle(data, id) {
     //console.log(data);
@@ -60,7 +77,7 @@ function App() {
     setSelectedTitle(groupTitle);
 
     //console.log(groupTitle);
-  }
+  };
 
   function updateGroupTasks(data, id) {
     var groupData = [];
@@ -72,7 +89,27 @@ function App() {
     setTasks(groupTasks);
 
     //console.log(groupTasks);
-  }
+  };
+
+  function updateSelectedTaskStatus(data, id) {
+    var currentTaskData = null;
+    var newGroupsData = null;
+
+    //составить массим
+    //newGroupsData = ...;
+    currentTaskData = data.find(item => item.id === id);
+    newGroupsData = !currentTaskData.done;
+    console.log(newGroupsData);
+    //newGroupsData = ...;
+
+
+
+    // передать массив
+    //setGroups(newGroupsData);
+
+    //updateGroupsData(newGroupsData);
+    //updateSelectedGroupData(newGroupsData, id)
+  };
 
 /*
   function changeTaskStatus(taskId) {
@@ -100,7 +137,8 @@ function App() {
         <TasksList
             taskItems={tasks}
             groupId={selectedId}
-            groupTitle={selectedTitle}/>
+            groupTitle={selectedTitle}
+            handelCheckStatus={handelCheckStatus}/>
       </div>
     </div>
   );

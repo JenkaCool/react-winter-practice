@@ -3,7 +3,7 @@ import plus from '../imges/plus.svg';
 import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 
-const TasksList = ({taskItems, groupId, groupTitle}) => {
+const TasksList = ({taskItems, groupId, groupTitle, handelCheckStatus}) => {
 
   function changeTaskStatus(taskId)  {
     console.log('Status changed');
@@ -18,7 +18,7 @@ const TasksList = ({taskItems, groupId, groupTitle}) => {
       <h2 className="Title"> {groupTitle} </h2>
       {taskItems.map((item) => (
         <Form.Group key={item.id} className="Task__item">
-          <Form.Check type="checkbox" checked={item.done} onClick={() => changeTaskStatus(item.id)} />
+          <Form.Check type="checkbox" checked={item.done} onClick={() => handelCheckStatus(groupId, item.id)} />
           <div className={item.done ? 'task_field task-done' : 'task_field'}>
             <Form.Control type="text" value={item.title} onChange={() => printMessage()} />
             <Form.Control type="text" value={item.description} onChange={() => printMessage()} />
