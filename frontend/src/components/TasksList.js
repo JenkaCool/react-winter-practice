@@ -1,14 +1,9 @@
-import plus from '../imgs/plus.svg';
+import plus from '../imges/plus.svg';
 
 import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 
-const TasksList = (props) => {
-  const taskItems = props.taskItems;
-  const [selectedGroupId, setSelectedGroupId] = useState(1);
-
-//  const title = props.groupTitle;
-//  <h2> { title } </h2>
+const TasksList = ({taskItems, groupId, groupTitle}) => {
 
   function changeTaskStatus(taskId)  {
     console.log('Status changed');
@@ -20,12 +15,12 @@ const TasksList = (props) => {
 
   return (
     <div className="Task__list">
-      <h2 className="Header"> Task list </h2>
+      <h2 className="Title"> {groupTitle} </h2>
       {taskItems.map((item) => (
         <Form.Group key={item.id} className="Task__item">
           <Form.Check type="checkbox" checked={item.done} onClick={() => changeTaskStatus(item.id)} />
           <div className={item.done ? 'task_field task-done' : 'task_field'}>
-            <Form.Control type="text" value={item.header} onChange={() => printMessage()} />
+            <Form.Control type="text" value={item.title} onChange={() => printMessage()} />
             <Form.Control type="text" value={item.description} onChange={() => printMessage()} />
             <Form.Control type="text" value={item.deadline} onChange={() => printMessage()} />
           </div>

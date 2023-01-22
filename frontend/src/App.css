@@ -54,6 +54,25 @@
 
 }
 
+.Task__groups {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.Task__group {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.Task__group::first-child {
+  margin-top: 5px;
+
+}
+
+.Task__group::last-child {
+  margin-bottom: 5px;
+}
+
 .Task__group input {
   width: auto;
 }
@@ -87,7 +106,7 @@ Task__list {
   gap: 20px;
 }
 
-.Header {
+.Title {
   text-align: left;
 }
 

@@ -1,18 +1,9 @@
-import plus from '../imgs/plus.svg';
+import plus from '../imges/plus.svg';
 
 import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 
-const GroupsList = (props) => {
-  const groupItems = props.groupItems;
-
-  const [selectedGroupId, setSelectedGroupId] = useState(1);
-
-  function selectGroup(groupId) {
-    setSelectedGroupId(groupId);
-    console.log(groupId);
-  }
-
+const GroupsList = ({groupItems, groupId, handelChangeGroup}) => {
   return (
     < >
       <h2 className="group_header"> Groups </h2>
@@ -21,11 +12,10 @@ const GroupsList = (props) => {
 
             <div className="Task__group">
               <div key={item.id}
-                   className={item.id === selectedGroupId ? "button __selected-group" : "button" }
-                   onClick={() => selectGroup(item.id)}>
-                {item.header}
+                   className={item.id === groupId ? "button __selected-group" : "button" }
+                   onClick={() => handelChangeGroup(item.id)}>
+                {item.title}
               </div>
-              <div className="button_small __menu">...</div>
             </div>
         ))}
         <div className="button __add_group">

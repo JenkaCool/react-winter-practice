@@ -1,18 +1,18 @@
 [
   {
     "id": 1,
-    "header": "Group header 1",
+    "title": "Group header 1",
     "tasks": [
       {
         "id": 1,
-        "header": "Header 1",
+        "title": "Header 1",
         "description": "Description of the first task",
         "deadline": "2023-01-25",
         "done": true
       },
       {
         "id": 2,
-        "header": "Header 2",
+        "title": "Header 2",
         "description": "Description of the second task",
         "deadline": "2023-01-25",
         "done": true
@@ -21,11 +21,11 @@
   },
   {
     "id": 2,
-    "header": "Group header 2",
+    "title": "Group header 2",
     "tasks": [
       {
-        "id": 3,
-        "header": "Header 3",
+        "id": 1,
+        "title": "Header 3",
         "description": "Description of the third task",
         "deadline": "2023-01-25",
         "done": false
@@ -34,7 +34,7 @@
   },
   {
     "id": 3,
-    "header": "Group header 3",
+    "title": "Group header 3",
     "tasks": [ ]
   }
 ]

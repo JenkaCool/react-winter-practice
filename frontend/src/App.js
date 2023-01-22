@@ -6,7 +6,9 @@ import GroupsList from './components/GroupsList.js';
 function App() {
   const [groups, setGroups] = useState([]);
   const [tasks, setTasks] = useState([]);
-  const [selectedGroupId, setSelectedGroupId] = useState(null);
+  const [selectedId, setSelectedId] = useState(1);
+  const [selectedTitle, setSelectedTitle] = useState(null);
+
 
   useEffect(() => {
     fetch('http://localhost:3010/api/all-tasks')
@@ -15,43 +17,62 @@ function App() {
   }, []);
 
 
+  const handelChangeGroup = (id) => {
+    console.log(id);
+    updateSelectedGroupData(groups, id);
+  }
+
   function initData(data) {
-    var currentGroupsData = [];
-    currentGroupsData = data;
-    setGroups(currentGroupsData);
+    updateGroupsData(data);
+    var id = getFirstGroupId(data);
+    updateSelectedGroupData(data, id);
+    console.log(data, id);
+  }
 
-    var firstGroupId = null;
-    firstGroupId = currentGroupsData[0].id;
-    setSelectedGroupId(firstGroupId);
+  function updateGroupsData(data) {
+    setGroups(data);
+  }
 
-    var currentGroup = [];
+  function getFirstGroupId(data) {
+    return data[0].id;
+  }
+
+  function updateSelectedGroupData(data, id) {
+    updateGroupId(id);
+    updateGroupTitle(data, id);
+    updateGroupTasks(data, id);
+  }
+
+  function updateGroupId(id) {
+    //console.log(id);
+    setSelectedId(id);
+  }
+
+  function updateGroupTitle(data, id) {
+    //console.log(data);
+    //console.log(id);
+
+    var groupTitle = null;
+    var currentGroupData = null;
+
+    currentGroupData = data.find(item => item.id === id)
+    groupTitle = currentGroupData.title;
+    setSelectedTitle(groupTitle);
+
+    //console.log(groupTitle);
+  }
+
+  function updateGroupTasks(data, id) {
+    var groupData = [];
     var groupTasks = [];
-    currentGroup = currentGroupsData.find(item => item.id === firstGroupId);
-    groupTasks = currentGroup.tasks;
+
+    groupData = data.find(item => item.id === id);
+    if (groupData) groupTasks = groupData.tasks ;
+
     setTasks(groupTasks);
-    console.log(groupTasks);
-  }
-/*
-  function getAllGroupsTasks() {
 
+    //console.log(groupTasks);
   }
-
-  function setSelectedGroupId(groupId) {
-    setSelectedGroupId(groupId);
-  }
-
-  function getSelectedGroupTitle(groupId) {
-    const currentTitle = groupItems.filter(item => {
-      return item.id === groupId
-    });
-    setSelectedGroup(currentTitle);
-    return currentTitle;
-  }
-
-  function getSelectedGroupTasks() {
-
-  }
-*/
 
 /*
   function changeTaskStatus(taskId) {
@@ -70,10 +91,16 @@ function App() {
     <div className="App">
       <div className="Top_bar"></div>
       <div className="Sidebar">
-        <GroupsList groupItems={groups}/>
+        <GroupsList
+            groupItems={groups}
+            groupId={selectedId}
+            handelChangeGroup={handelChangeGroup}/>
       </div>
       <div className="Content">
-        <TasksList taskItems={tasks}/>
+        <TasksList
+            taskItems={tasks}
+            groupId={selectedId}
+            groupTitle={selectedTitle}/>
       </div>
     </div>
   );
