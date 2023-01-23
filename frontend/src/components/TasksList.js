@@ -5,7 +5,7 @@ import wastebasket from '../imges/wastebasket.svg';
 import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 
-const TasksList = ({taskItems, groupId, groupTitle, handleCheckStatus, handleDeleteTask}) => {
+const TasksList = ({taskItems, groupId, groupTitle, handleCheckStatus, handleRemoveTask}) => {
 
   function changeTaskStatus(taskId)  {
     console.log('Status changed');
@@ -36,8 +36,8 @@ const TasksList = ({taskItems, groupId, groupTitle, handleCheckStatus, handleDel
               <span className="deadline_img"/>
               <span className="status-text">in process</span>
             </div>}
-          <button className="button_control" onClick={() => handleDeleteTask(groupId, item.id)}>
-            <img src={wastebasket} className="wastebasket_img" alt="delete" />
+          <button className="button_control" onClick={() => handleRemoveTask(groupId, item.id)}>
+            <img src={wastebasket} className="wastebasket_img" alt="Remove task" />
            </button>
         </Form.Group>
       ))}

@@ -40,7 +40,7 @@ function App() {
 
   }
 
-  const handleDeleteTask = (groupId, taskId) => {
+  const handleRemoveTask = (groupId, taskId) => {
     //console.log(id);
     var currentGroup = [];
     currentGroup = groups.find(item => item.id === groupId);
@@ -49,6 +49,18 @@ function App() {
     //console.log(currentGroup);
     setGroups(groups.map((item) => item.id === groupId ? { ...item, currentGroup } : item));
     setTasks(currentGroup.tasks);
+  }
+
+  const handleRemoveGroup = (groupId) => {
+     var currentGroup = [];
+
+ /*   if (selectedId === groupId) {
+       var id = currentGroup.findIndex(item => item.id === groupId);
+       var newId = selectedId === groupId ? 1 : selectedId;
+     }
+*/
+     currentGroup = groups.filter(item => item.id !== groupId);
+     setGroups(currentGroup);
   }
 
   function initData(data) {
@@ -111,7 +123,8 @@ function App() {
         <GroupsList
             groupItems={groups}
             groupId={selectedId}
-            handleChangeGroup={handleChangeGroup}/>
+            handleChangeGroup={handleChangeGroup}
+            handleRemoveGroup={handleRemoveGroup}/>
       </div>
       <div className="Content">
         <TasksList
@@ -119,7 +132,7 @@ function App() {
             groupId={selectedId}
             groupTitle={selectedTitle}
             handleCheckStatus={handleCheckStatus}
-            handleDeleteTask={handleDeleteTask}/>
+            handleRemoveTask={handleRemoveTask}/>
       </div>
     </div>
   );
