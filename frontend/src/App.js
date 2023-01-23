@@ -17,12 +17,12 @@ function App() {
   }, []);
 
 
-  const handelChangeGroup = (id) => {
+  const handleChangeGroup = (id) => {
     //console.log(id);
     updateSelectedGroupData(groups, id);
-  };
+  }
 
-  const handelCheckStatus = (groupId, taskId) => {
+  const handleCheckStatus = (groupId, taskId) => {
     //console.log(id);
     var currentGroup = [];
     var currentTask = [];
@@ -37,7 +37,19 @@ function App() {
     currentGroup.tasks[currentTaskId].done = !taskDone;
 
     setGroups(groups.map((item) => item.id === groupId ? { ...item, currentGroup } : item));
-  };
+
+  }
+
+  const handleDeleteTask = (groupId, taskId) => {
+    //console.log(id);
+    var currentGroup = [];
+    currentGroup = groups.find(item => item.id === groupId);
+    console.log(currentGroup);
+    currentGroup.tasks = currentGroup.tasks.filter(task => task.id !== taskId);
+    //console.log(currentGroup);
+    setGroups(groups.map((item) => item.id === groupId ? { ...item, currentGroup } : item));
+    setTasks(currentGroup.tasks);
+  }
 
   function initData(data) {
     updateGroupsData(data);
@@ -91,38 +103,6 @@ function App() {
     //console.log(groupTasks);
   };
 
-  function updateSelectedTaskStatus(data, id) {
-    var currentTaskData = null;
-    var newGroupsData = null;
-
-    //составить массим
-    //newGroupsData = ...;
-    currentTaskData = data.find(item => item.id === id);
-    newGroupsData = !currentTaskData.done;
-    console.log(newGroupsData);
-    //newGroupsData = ...;
-
-
-
-    // передать массив
-    //setGroups(newGroupsData);
-
-    //updateGroupsData(newGroupsData);
-    //updateSelectedGroupData(newGroupsData, id)
-  };
-
-/*
-  function changeTaskStatus(taskId) {
-    console.log(tasks);
-    const changedTasksList = [...tasks];
-    const task = changedTasksList.find(
-      item => item.id === taskId);
-    if (task)
-      task.done = !task.done;
-    setTasks(changedTasksList);
-    console.log('Status changed');
-  }
-*/
 
   return (
     <div className="App">
@@ -131,14 +111,15 @@ function App() {
         <GroupsList
             groupItems={groups}
             groupId={selectedId}
-            handelChangeGroup={handelChangeGroup}/>
+            handleChangeGroup={handleChangeGroup}/>
       </div>
       <div className="Content">
         <TasksList
             taskItems={tasks}
             groupId={selectedId}
             groupTitle={selectedTitle}
-            handelCheckStatus={handelCheckStatus}/>
+            handleCheckStatus={handleCheckStatus}
+            handleDeleteTask={handleDeleteTask}/>
       </div>
     </div>
   );

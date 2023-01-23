@@ -3,7 +3,7 @@ import plus from '../imges/plus.svg';
 import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 
-const GroupsList = ({groupItems, groupId, handelChangeGroup}) => {
+const GroupsList = ({groupItems, groupId, handleChangeGroup}) => {
   return (
     < >
       <h2 className="group_header"> Groups </h2>
@@ -13,7 +13,7 @@ const GroupsList = ({groupItems, groupId, handelChangeGroup}) => {
             <div className="Task__group">
               <div key={item.id}
                    className={item.id === groupId ? "button __selected-group" : "button" }
-                   onClick={() => handelChangeGroup(item.id)}>
+                   onClick={() => handleChangeGroup(item.id)}>
                 {item.title}
               </div>
             </div>
