@@ -9,18 +9,26 @@ function App() {
   const [selectedId, setSelectedId] = useState(1);
   const [selectedTitle, setSelectedTitle] = useState("Tasks list");
   const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
 
 
 
   useEffect(() => {
-    setTimeout(() => {
     fetch('http://localhost:3010/api/all-tasks')
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok)
+          throw Error("Couldn't fetch the data for that resource'");
+        return res.json();
+        })
       .then((result) => {
         initData(result.data);
         setIsPending(false);
-      });
-      }, 1000);
+        setError(null);
+      })
+      .catch(error => {
+        setIsPending(false);
+        setError(error.message);
+      })
   }, []);
 
 
@@ -137,7 +145,8 @@ function App() {
       </div>
       <div className="Content">
         <h2 className="Title"> {selectedTitle} </h2>
-        { isPending && <div> Loading... </div>}
+        { error && <div className="__error> {error} </div>}
+        { isPending && <div className="__loading> Loading... </div>}
         {tasks && <TasksList
             taskItems={tasks}
             groupId={selectedId}
