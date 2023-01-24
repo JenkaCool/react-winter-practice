@@ -5,7 +5,7 @@ import wastebasket from '../imges/wastebasket.svg';
 import { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 
-const TasksList = ({taskItems, groupId, groupTitle, handleCheckStatus, handleRemoveTask}) => {
+const TasksList = ({taskItems, groupId, handleCheckStatus, handleRemoveTask}) => {
 
   function changeTaskStatus(taskId)  {
     console.log('Status changed');
@@ -17,7 +17,6 @@ const TasksList = ({taskItems, groupId, groupTitle, handleCheckStatus, handleRem
 
   return (
     <div className="Task__list">
-      <h2 className="Title"> {groupTitle} </h2>
       {taskItems.map((item) => (
         <Form.Group key={item.id} className="Task__item">
           <Form.Check type="checkbox" checked={item.done} onClick={() => handleCheckStatus(groupId, item.id)} />

@@ -4,16 +4,23 @@ import TasksList from './components/TasksList.js';
 import GroupsList from './components/GroupsList.js';
 
 function App() {
-  const [groups, setGroups] = useState([]);
-  const [tasks, setTasks] = useState([]);
+  const [groups, setGroups] = useState(null);
+  const [tasks, setTasks] = useState(null);
   const [selectedId, setSelectedId] = useState(1);
-  const [selectedTitle, setSelectedTitle] = useState(null);
+  const [selectedTitle, setSelectedTitle] = useState("Tasks list");
+  const [isPending, setIsPending] = useState(true);
+
 
 
   useEffect(() => {
+    setTimeout(() => {
     fetch('http://localhost:3010/api/all-tasks')
       .then((res) => res.json())
-      .then((result) => initData(result.data));
+      .then((result) => {
+        initData(result.data);
+        setIsPending(false);
+      });
+      }, 1000);
   }, []);
 
 
@@ -120,19 +127,22 @@ function App() {
     <div className="App">
       <div className="Top_bar"></div>
       <div className="Sidebar">
-        <GroupsList
+        <h2 className="group_header"> Groups </h2>
+        { isPending && <div className="__loading"> Loading... </div>}
+        {groups && <GroupsList
             groupItems={groups}
             groupId={selectedId}
             handleChangeGroup={handleChangeGroup}
-            handleRemoveGroup={handleRemoveGroup}/>
+            handleRemoveGroup={handleRemoveGroup}/>}
       </div>
       <div className="Content">
-        <TasksList
+        <h2 className="Title"> {selectedTitle} </h2>
+        { isPending && <div> Loading... </div>}
+        {tasks && <TasksList
             taskItems={tasks}
             groupId={selectedId}
-            groupTitle={selectedTitle}
             handleCheckStatus={handleCheckStatus}
-            handleRemoveTask={handleRemoveTask}/>
+            handleRemoveTask={handleRemoveTask}/>}
       </div>
     </div>
   );
