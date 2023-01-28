@@ -104,6 +104,7 @@ Task__list {
   align-items: center;
   background-color: #F8F8F8;
   gap: 20px;
+  cursor: grab;
 }
 
 .Title {
@@ -226,9 +227,47 @@ Task__list {
   color: white;
 }
 
+.not-found ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.not-found ul li {
+  margin: 0 10px;
+  list-style-type:none;
+}
+
+
+.not-found a {
+  cursor: pointer;
+}
+
+.not-found p {
+  text-align: center;
+}
+
+.page-link:hover {
+    color: #0d6efd;
+}
+
+.page-link {
+  color: #FFC46B;
+}
+
+.button-link {
+ text-decoration: none;
+ color: inherit;
+}
+
 .App-link {
   color: #61dafb;
 }
+
+
 
 @keyframes App-logo-spin {
   from {

@@ -1,0 +1,42 @@
+{
+  "groups":[
+    {
+      "id": 1,
+      "title": "Group header 1",
+      "tasks": [
+        {
+          "id": 1,
+          "title": "Header 1",
+          "description": "Description of the first task",
+          "deadline": "2023-01-25",
+          "done": true
+        },
+        {
+          "id": 2,
+          "title": "Header 2",
+          "description": "Description of the second task",
+          "deadline": "2023-01-25",
+          "done": true
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Group header 2",
+      "tasks": [
+        {
+          "id": 1,
+          "title": "Header 3",
+          "description": "Description of the third task",
+          "deadline": "2023-01-25",
+          "done": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Group header 3",
+      "tasks": [ ]
+    }
+  ]
+}

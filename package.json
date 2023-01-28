@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/index.js",
-    "server": "nodemon backend/index.js",
+    "json-server": "npx json-server --watch backend/data/db.json --port 8000",
     "client": "npm start --prefix frontend",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently  \"npm run server\"  \"npm run client\" "
+    "dev": "concurrently  \"npm run json-server\"  \"npm run client\" "
   },
   "author": "JenkaCool",
   "license": "ISC",
@@ -15,6 +14,7 @@
   "dependencies": {
     "concurrently": "^7.6.0",
     "express": "^4.18.2",
+    "react-router-dom": "^6.8.0",
     "sequelize": "^6.25.8",
     "sequelize-cli": "^6.5.2"
   },

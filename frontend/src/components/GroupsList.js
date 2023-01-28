@@ -1,32 +1,58 @@
 import plus from '../imges/plus.svg';
-import wastebasket from '../imges/wastebasket.svg';
+import Group from './Group';
 
 import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 
-const GroupsList = ({groupItems, groupId, handleChangeGroup, handleRemoveGroup}) => {
+const GroupsList = () => {
+  const { groupId } = useParams();
+
+  const [groups, setGroups] = useState(null);
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
+  const [newTask, setNewTask] = useState(null);
+  const [selectedId, setSelectedId] = useState(0);
+
+  useEffect(() => {
+    fetch(`http://localhost:8000/groups/`)
+      .then((res) => {
+        if (!res.ok)
+          throw Error("Couldn't fetch the data for that resource");
+        return res.json();
+        })
+      .then((result) => {
+        initData(result);
+        setIsPending(false);
+        setError(null);
+      })
+      .catch(error => {
+        setIsPending(false);
+        setError(error.message);
+      })
+  }, [groupId]);
+
+  function initData(data) {
+    setGroups(data);
+  };
+
   return (
-    < >
-      <div className="Task__groups">
-        {groupItems.map((item) => (
-          <div className="Task__group">
-            <div key={item.id}
-                 className={item.id === groupId ? "button __selected-group" : "button" }
-                 onClick={() => handleChangeGroup(item.id)}>
-              {item.title}
-            </div>
-            <button className="button_control" onClick={() => handleRemoveGroup(item.id)}>
-              <img src={wastebasket} className="wastebasket_img" alt="Remove task" />
-            </button>
+    <>
+      <h2 className="group_header"> Groups </h2>
+      { isPending && <div className="__loading"> Loading... </div> }
+      {groups && <>
+        <div className="Task__groups">
+          {groups.map((item) => (
+            <Group key={item.id} group={item} groupId={groupId}/>
+          ))}
+          <div className="button __add_group">
+            <img src={plus} className="plus_img" alt="+" />
+            <span>Add group...</span>
           </div>
-        ))}
-        <div className="button __add_group">
-        <img src={plus} className="plus_img" alt="+" />
-          <span>Add group...</span>
         </div>
-      </div>
+      </>}
     </>
   );
 }
 
-export default GroupsList;
+export { GroupsList }
