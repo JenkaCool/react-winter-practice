@@ -2,11 +2,13 @@ import plus from '../imges/plus.svg';
 import wastebasket from '../imges/wastebasket.svg';
 
 import { useState, useEffect } from 'react';
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 
 
 const Group = ({group, groupId}) => {
+  const navigate = useNavigate();
+
 
   function changeTaskStatus(taskId)  {
     console.log('Status changed');
@@ -16,8 +18,16 @@ const Group = ({group, groupId}) => {
     console.log('Field changed');
   }
 
-  const handleRemoveGroup = (groupId) => {
+  const handleRemoveGroup = (id) => {
     console.log('Remove');
+    fetch(`http://localhost:8000/groups/${id}`,{
+      method: 'DELETE',
+    }).then(() => {
+      if (groupId === id) {
+        navigate('/');
+        }
+    })
+
  /*    var currentGroup = [];
      if (selectedId === groupId) {
        var id = currentGroup.findIndex(item => item.id === groupId);
@@ -30,19 +40,13 @@ const Group = ({group, groupId}) => {
  */
   }
 
-  const handleChangeGroup = (id) => {
-    console.log('Change');
-    //console.log(id);
-     /*---
-    updateSelectedGroupData(groups, id);
-     */
-  }
-
   return (
     <div className="Task__group">
       <Link className="button-link" to={`groups/${group.id}` }>
+      {console.log(group.id)}
+      {console.log(groupId)}
       <div key={group.id}
-        className={group.id === groupId ? "button __selected-group" : "button" }>
+        className={`button ${group.id === groupId ? "__selected-group" : "" }`}>
         {group.title}
       </div>
       </Link>

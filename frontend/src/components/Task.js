@@ -50,24 +50,24 @@ const Task = ({task, groupId}) => {
   return (
     <Form.Group className="Task__item">
       <Form.Check type="checkbox" checked={task.done} onClick={() => handleCheckStatus(groupId, task.id)} />
-        <div className={task.done ? 'task_field task-done' : 'task_field'}>
-          <Form.Control type="text" value={task.title} onChange={() => printMessage()} />
-          <Form.Control type="text" value={task.description} onChange={() => printMessage()} />
-          <Form.Control type="text" value={task.deadline} onChange={() => printMessage()} />
+      <div className={task.done ? 'task_field task-done' : 'task_field'}>
+        <Form.Control type="text" value={task.title} onChange={() => printMessage()} />
+        <Form.Control type="text" value={task.description} onChange={() => printMessage()} />
+        <Form.Control type="text" value={task.deadline} onChange={() => printMessage()} />
+      </div>
+      {task.done ?
+        <div className='status __done'>
+          <span className="deadline_img"/>
+          <span className="status-text">done</span>
         </div>
-        {task.done ?
-          <div className='status __done'>
-            <span className="deadline_img"/>
-            <span className="status-text">done</span>
-          </div>
-          :
-          <div className='status __in_process'>
-            <span className="deadline_img"/>
-            <span className="status-text">in process</span>
-          </div>
-        }
-        <button className="button_control" onClick={() => handleRemoveTask(groupId, task.id)}>
-          <img src={wastebasket} className="wastebasket_img" alt="Remove task" />
+        :
+        <div className='status __in_process'>
+          <span className="deadline_img"/>
+          <span className="status-text">in process</span>
+        </div>
+      }
+      <button className="button_control" onClick={() => handleRemoveTask(groupId, task.id)}>
+        <img src={wastebasket} className="wastebasket_img" alt="Remove task" />
       </button>
     </Form.Group>
   );
