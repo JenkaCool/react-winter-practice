@@ -7,7 +7,7 @@ const Start = () => {
       <br></br>
       <p> It's task manager app. </p>
       <br></br>
-      <p> To start select group from left menu </p>
+      <p> To get started, select a group from the left menu </p>
     </div>
   );
 }
