@@ -46,31 +46,7 @@ const GroupsList = () => {
      setSelectedId(id);
    }
 
-/*
-  function handleDropTask(e, group) {
-    group.task.push(currentTask)
-    const currentIndex = currentGroup.tasks.findIndex(currentTask)
-    currentGroup.tasks.splice(currentIndex, 1);
-
-    setGroups(groups.map (g => {
-      if (g.id === group.id) {
-        return groups;
-      }
-      if (g.id === group.id) {
-        return currentGroup
-      }
-      return g;
-
-    }));
-  };
-
-handleDragOver={(e) => handleDragOver(e)}
-handleDropTask={(e) => handleDropTask(e, group)}
-
-*/
-
   const handleSubmit= (e) => {
-    console.log(title);
     const newGroup = { title, tasks };
 
     setIsPending(true);
@@ -80,8 +56,8 @@ handleDropTask={(e) => handleDropTask(e, group)}
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(newGroup)
     }).then(( ) => {
-      console.log(`New group added`);
       setIsPending(false);
+      console.log(`Group added`);
     })
   }
 

@@ -18,12 +18,10 @@ const Group = ({group, selectedId, handleSelect}) => {
   }
 
   const handleRemoveGroup = (id) => {
-    console.log('Remove');
     fetch(`http://localhost:8000/groups/${id}`,{
       method: 'DELETE',
     }).then(() => {
-        console.log("1:", selectedId)
-        console.log("2:", id)
+      console.log(`Group deleted`);
       if (selectedId === id) {
         navigate('/');
       }

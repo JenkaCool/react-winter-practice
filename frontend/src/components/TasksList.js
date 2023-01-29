@@ -62,10 +62,8 @@ const TasksList = () => {
     console.log(taskId);
     console.log(tasks.filter(task => task.id !== taskId));
 
-
     const newTasksList = { id, title, tasks }
 
-    console.log('Removed');
     fetch(`http://localhost:8000/groups/${groupId}`,{
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
@@ -75,59 +73,6 @@ const TasksList = () => {
       setIsPending(false);
     })
   }
-
-/*
-  const [currentTask, setCurrentTask] = useState(null);
-  const [currentGroup, setCurrentGroup] = useState(null);
-
-  function handleDragOver(e) {
-    e.preventDefault();
-    if (e.target.className == "Task__item") {
-      e.target.style.boxShadow = '0 4px 3px gray';
-    }
-  };
-
-  function handleDragLeave(e) {
-    e.target.style.boxShadow = 'none';
-  };
-
-  function handleDragStart(e, group, task) {
-    setCurrentGroup(group);
-    setCurrentTask(task);
-  };
-
-  function handleDragEnd(e) {
-    e.target.style.boxShadow = 'none';
-  };
-
-  function handleDrop(e, group, task) {
-    e.preventDefault();
-    const currentIndex = currentGroup.tasks.findIndex(currentTask)
-    currentGroup.tasks.splice(currentIndex, 1);
-
-    const dropIndex = group.tasks.findIndex(task)
-    group.tasks.splice(dropIndex + 1, 0, currentTask);
-
-    setGroups(groups.map (g => {
-      if (g.id === group.id) {
-        return groups;
-      }
-      if (g.id === group.id) {
-        return currentGroup
-      }
-      return g;
-
-    }));
-  };
-
-             draggable={true}
-             onDragOver={(e) => handleDragOver(e)}
-             onDragLeave={(e) => handleDragLeave(e)}
-             onDragStart={(e) => handleDragStart(e, group, task)}
-             onDragEnd={(e) => handleDragEnd(e)}
-             onDrop={(e) => handleDrop(e, group, task)}
-
-*/
 
   return (
     <>
