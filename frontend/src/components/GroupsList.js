@@ -1,7 +1,7 @@
 import plus from '../imges/plus.svg';
 import Group from './Group';
 
-import { groups, isPending, handleDragOver, handleDropTask } from '../handleTaskDrag';
+import { groups, handleDragOver, handleDropTask } from '../handleTaskDrag';
 
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
@@ -16,8 +16,10 @@ const GroupsList = () => {
 
   const [len, setLen] = useState(null);
   const [id, setId] = useState(null);
-  const [title, setTitle] = useState(null);
+  const [title, setTitle] = useState("New Group");
   const [tasks, setTasks] = useState([]);
+
+  const [selectedId, setSelectedId] = useState(0);
 
   useEffect(() => {
     const abortControl = new AbortController();
@@ -32,22 +34,17 @@ const GroupsList = () => {
         setIsPending(false);
         setError(null);
       })
-      .catch(error => {
-        if (error.name === 'AbortError')
-          console.log('Fetched aborted')
-        else {
-          setIsPending(false);
-          setError(error.message);
-        }
-      })
-      return () => abortControl.abort();
   }, []);
 
   function initData(data) {
     setGroups(data);
     setLen(data.length);
-    setId(data[data.length - 1].id + 1);
+    setId(data[data.length - 1].id);
   };
+
+   function handleSelect(id) {
+     setSelectedId(id);
+   }
 
 /*
   function handleDropTask(e, group) {
@@ -73,9 +70,7 @@ handleDropTask={(e) => handleDropTask(e, group)}
 */
 
   const handleSubmit= (e) => {
-    e.preventDefault();
-    if (!title)
-      setTitle(`New group ${len}`);
+    console.log(title);
     const newGroup = { title, tasks };
 
     setIsPending(true);
@@ -85,7 +80,7 @@ handleDropTask={(e) => handleDropTask(e, group)}
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify(newGroup)
     }).then(( ) => {
-      console.log(`New blog added`);
+      console.log(`New group added`);
       setIsPending(false);
     })
   }
@@ -94,13 +89,13 @@ handleDropTask={(e) => handleDropTask(e, group)}
     <>
       <h2 className="group_header"> Groups </h2>
       { error && <div className="__error"> {error} </div> }
-      { isPending && <div className="__loading"> Loading... </div> }
       {groups && <>
         <div className="Task__groups">
           {groups.map((item) => (
             <Group key={item.id}
               group={item}
-              groupId={groupId}/>
+              selectedId={selectedId}
+              handleSelect={handleSelect}/>
           ))}
           <form
             className="button __add_group"
@@ -108,10 +103,17 @@ handleDropTask={(e) => handleDropTask(e, group)}
             <input
               type="text"
               placeholder="Add new group..."
-              onChange={(e) => setTitle(e.target.value)}/>
-            <button className="button_control">
-              <img src={plus} className="plus_img" alt="+" />
-            </button>
+              onChange={(e) => {e.target.value ? setTitle(e.target.value) : setTitle("New Group")}}/>
+            { !isPending &&
+              <button className="button_control">
+                <img src={plus} className="plus_img" alt="+" />
+              </button>
+            }
+            { isPending &&
+              <button disabled className="button_control">
+                <img src={plus} className="plus_img" alt="+" />
+              </button>
+            }
           </form>
         </div>
       </>}

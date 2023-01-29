@@ -11,13 +11,13 @@ import { useParams } from "react-router-dom";
 const TasksList = () => {
   const { groupId } = useParams();
 
-
   const [groupItems, setGroupItems] = useState(null);
   const [tasks, setTasks] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
   const [newTask, setNewTask] = useState(null);
-
+  const [id, setId] = useState(null);
+  const [title, setTitle] = useState(null);
 
   useEffect(() => {
     fetch(`http://localhost:8000/groups/${groupId}`)
@@ -51,6 +51,29 @@ const TasksList = () => {
   const enterNewTask = (e) => setNewTask(e.target.value);
   function addTask() {
     const taskObj = {id: groupItems.tasks.length + 1, title:newTask, deadline: nextDay(), done: false}
+  }
+
+  const handleRemoveTask = (groupId, taskId) => {
+    setId(groupItems.id);
+    const groupTitle = groupItems.title;
+    setTitle(groupTitle);
+    const tasksList = tasks.filter(task => task.id !== taskId);
+    setTasks(tasksList);
+    console.log(taskId);
+    console.log(tasks.filter(task => task.id !== taskId));
+
+
+    const newTasksList = { id, title, tasks }
+
+    console.log('Removed');
+    fetch(`http://localhost:8000/groups/${groupId}`,{
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(newTasksList)
+    }).then(( ) => {
+      console.log(`Task deleted`);
+      setIsPending(false);
+    })
   }
 
 /*
@@ -114,9 +137,11 @@ const TasksList = () => {
         <h2 className="Title"> { groupItems.title } </h2>
         <div>
           {tasks.map((item) => (
-            <Task key={item.id}
+            <Task
+             key={item.id}
              task={item}
-             groupId={groupId} />
+             groupId={groupId}
+             handleRemoveTask={handleRemoveTask} />
           ))}
           <div className="button __add_task">
             <img src={plus} className="plus_img" alt="+" />

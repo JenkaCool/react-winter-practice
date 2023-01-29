@@ -6,9 +6,8 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 
 
-const Group = ({group, groupId}) => {
+const Group = ({group, selectedId, handleSelect}) => {
   const navigate = useNavigate();
-
 
   function changeTaskStatus(taskId)  {
     console.log('Status changed');
@@ -23,9 +22,11 @@ const Group = ({group, groupId}) => {
     fetch(`http://localhost:8000/groups/${id}`,{
       method: 'DELETE',
     }).then(() => {
-      if (groupId === id) {
+        console.log("1:", selectedId)
+        console.log("2:", id)
+      if (selectedId === id) {
         navigate('/');
-        }
+      }
     })
 
  /*    var currentGroup = [];
@@ -42,14 +43,16 @@ const Group = ({group, groupId}) => {
 
   return (
     <div className="Task__group">
-      <Link className="button-link" to={`groups/${group.id}` }>
-      {console.log(group.id)}
-      {console.log(groupId)}
-      <div key={group.id}
-        className={`button ${group.id === groupId ? "__selected-group" : "" }`}>
-        {group.title}
+      <div onClick={() =>handleSelect(group.id)}>
+        <Link className="button-link" to={`groups/${group.id}` }>
+        {console.log(group.id)}
+        {console.log(selectedId)}
+        <div key={group.id}
+          className={`button ${group.id === selectedId ? "__selected-group" : "" }`}>
+          {group.title}
+        </div>
+        </Link>
       </div>
-      </Link>
       <button className="button_control" onClick={() => handleRemoveGroup(group.id)}>
         <img src={wastebasket} className="wastebasket_img" alt="Remove task" />
       </button>

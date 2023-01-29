@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 
 
-const Task = ({task, groupId}) => {
+const Task = ({task, groupId, handleRemoveTask}) => {
 
   function changeTaskStatus(taskId)  {
     console.log('Status changed');
@@ -14,20 +14,6 @@ const Task = ({task, groupId}) => {
 
   function printMessage() {
     console.log('Field changed');
-  }
-
-  const handleRemoveTask = (groupId, taskId) => {
-    console.log('Remove');
-    //console.log(id);
-     /*---
-    var currentGroup = [];
-    currentGroup = groups.find(item => item.id === groupId);
-    console.log(currentGroup);
-    currentGroup.tasks = currentGroup.tasks.filter(task => task.id !== taskId);
-    //console.log(currentGroup);
-    setGroups(groups.map((item) => item.id === groupId ? { ...item, currentGroup } : item));
-    setTasks(currentGroup.tasks);
-    */
   }
 
   const handleCheckStatus = (groupId, taskId) => {
